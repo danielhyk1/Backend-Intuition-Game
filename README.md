@@ -1,78 +1,37 @@
-# 🏗 Scaffold-ETH 2
+\***\*INPROGRESS\*\***
 
-<h4 align="center">
-  <a href="https://docs.scaffoldeth.io">Documentation</a> |
-  <a href="https://scaffoldeth.io">Website</a>
-</h4>
+Project Idea:
 
-🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
+Using Oracle nodes to fetch off-chain data, users can place intuitive guesses using tokens for predicting data results.
+Tokens are redistributed based on the pooled answers and answer variations. Ie. ranged inputs, multiple choice, or binary
 
-⚙️ Built using NextJS, RainbowKit, Hardhat, Wagmi, and Typescript.
+Token Supply Mechanism
 
-- ✅ **Contract Hot Reload**: Your frontend auto-adapts to your smart contract as you edit it.
-- 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
-- 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Ethereum network.
+1. Rnadom Number Lottery with rewards as distributed spread
 
-![Debug Contracts tab](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/1171422a-0ce4-4203-bcd4-d2d1941d198b)
+   - conducted at specific time intervals
 
-## Requirements
+2. trade testnet tokens for AAT tokens
 
-Before you begin, you need to install the following tools:
+**********\*\***********\*\*\*\***********\*\***********Dont allow transfer of tokens between people
 
-- [Node (v18 LTS)](https://nodejs.org/en/download/)
-- Yarn ([v1](https://classic.yarnpkg.com/en/docs/install/) or [v2+](https://yarnpkg.com/getting-started/install))
-- [Git](https://git-scm.com/downloads)
+## Backend Architecture:
 
-## Quickstart
+Distributor: "Hub" or center of logic
+Deploys: 1. AAT 2. SubDistribute 3. Lottery
 
-To get started with Scaffold-ETH 2, follow the steps below:
+AAT: Mints and sends only to Distribute
 
-1. Clone this repo & install dependencies
+SubDistributor: Factory pattern with Distribute and will be parent of inherited SubDistributeTypes
+Deploys: 1. SubDistributeType1 2. SubDistributeType2
+Functions: 1. Receives AAT from users 2. Distributes AAT to winners
 
-```
-git clone https://github.com/scaffold-eth/scaffold-eth-2.git
-cd scaffold-eth-2
-yarn install
-```
+Lottery: Distributes AAT to users
 
-2. Run a local network in the first terminal:
+---
 
-```
-yarn chain
-```
+1. Distribution contract controls the supply of the tokens
 
-This command starts a local Ethereum network using Hardhat. The network runs on your local machine and can be used for testing and development. You can customize the network configuration in `hardhat.config.ts`.
+2. Distribution contract handles local distribution contracts
 
-3. On a second terminal, deploy the test contract:
-
-```
-yarn deploy
-```
-
-This command deploys a test smart contract to the local network. The contract is located in `packages/hardhat/contracts` and can be modified to suit your needs. The `yarn deploy` command uses the deploy script located in `packages/hardhat/deploy` to deploy the contract to the network. You can also customize the deploy script.
-
-4. On a third terminal, start your NextJS app:
-
-```
-yarn start
-```
-
-Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the contract component or the example ui in the frontend. You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
-
-Run smart contract test with `yarn hardhat:test`
-
-- Edit your smart contract `YourContract.sol` in `packages/hardhat/contracts`
-- Edit your frontend in `packages/nextjs/pages`
-- Edit your deployment scripts in `packages/hardhat/deploy`
-
-## Documentation
-
-Visit our [docs](https://docs.scaffoldeth.io) to learn how to start building with Scaffold-ETH 2.
-
-To know more about its features, check out our [website](https://scaffoldeth.io).
-
-## Contributing to Scaffold-ETH 2
-
-We welcome contributions to Scaffold-ETH 2!
-
-Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
+3. Local distribution contracts use pooled tokens to redistribute to users
